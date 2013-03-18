@@ -13,18 +13,17 @@ def make_chains(corpus):
 	i = 0
 	#words not in pairs
 	for words in corpus:
+		# keeps iterator within bounds of list
 		if i ==(len(corpus)-3):
 			break
+
 		key = ' '.join(corpus[i:i+2])
 		if key not in dictionary:
 			dictionary[key] = [corpus[i +2]]
-			print "Words not in dictionary", words
 		else:
-			print "Words in dictionary", words
 	 		#appends changes the list
-			dictionary[' '.join(corpus[i:i+2])].append(corpus[i+2])
+			dictionary[key].append(corpus[i+2])
 		i += 1
-	print 'TYPE!!!',type(dictionary[key])	
 	print "NEW!!", dictionary
 
 	# i = 1
@@ -43,19 +42,29 @@ def make_chains(corpus):
 
 def make_text(chains):
 
-	# def next_word(dictionary, current_word):
-	# 	next_word = dictionary[first_word][randint(0, len(dictionary[first_word]) - 1)]
-	# 	return next_word
 
 	"""Takes a dictionary of markov chains and returns random text
 	based off an original text."""
-	# for pair in range(0, 2):
 	first_word = random.choice(chains.keys())
-		#random_text = chains[first_word] #this value is an array
-	random_int = chains[first_word][randint(0, len(chains[first_word]) - 1)]
-	print first_word, random_int,
-	# random_text = chains[first_word[randint(0,len(chains[first_word])]
-	# first_word = first_word + next_word(chains, first_word)
+	sentence = first_word
+
+
+	for i in range(0,3):	
+		# loop range(x,y) times
+		# get random value from key, value is a list
+		next_word = chains[first_word][randint(0, len(chains[first_word]) - 1)]
+		#making a space " "
+		next_word = " " + next_word
+		sentence += next_word
+		#split string first_word into a list
+		split = first_word.split()
+		#get second element of list and turns back into a string
+		first_word = str(split[1])
+		#concatenate first_word and next word
+		first_word = first_word + next_word
+		
+	print "SENTENCE: ", sentence
+
 
 
 def main(argv):
