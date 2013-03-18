@@ -4,14 +4,11 @@ import sys
 import random
 from random import randint
 
-def make_chains(corpus_1, corpus_2):
+def make_chains(corpus):
 	"""Takes an input text as a string and returns a dictionary of
 	markov chains."""
 	dictionary = {}
-	corpus_1 = corpus_1.lower().split()
-	corpus_2 = corpus_2.lower().split()
-	corpus = corpus_1 + corpus_2
-
+	corpus = corpus.split()
 	#corpus is a list
 	i = 0
 	#words not in pairs
@@ -65,7 +62,7 @@ def make_text(chains):
 		#concatenate first_word and next word
 		first_word = first_word + next_word
 		
-	print "SENTENCE: ", sentence
+	return sentence
 
 
 
@@ -76,9 +73,13 @@ def main(argv):
 	#opens txt file form command line
 	input_text_1 = open(filename_1).read()
 	input_text_2 = open(filename_2).read()
-	dictionary = make_chains(input_text_1, input_text_2)
+	dictionary_1 = make_chains(input_text_1)
+	dictionary_2 = make_chains(input_text_2)
+	sentence_1 = make_text(dictionary_1)
+	sentence_2 = make_text(dictionary_2)
+	print "Sentence: ", sentence_1.title(), sentence_2 + "."
 
-	random_text = make_text(dictionary)
+
 	# print random_text
 
 if __name__ == "__main__":
