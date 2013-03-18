@@ -4,11 +4,14 @@ import sys
 import random
 from random import randint
 
-def make_chains(corpus):
+def make_chains(corpus_1, corpus_2):
 	"""Takes an input text as a string and returns a dictionary of
 	markov chains."""
 	dictionary = {}
-	corpus = corpus.lower().split()
+	corpus_1 = corpus_1.lower().split()
+	corpus_2 = corpus_2.lower().split()
+	corpus = corpus_1 + corpus_2
+
 	#corpus is a list
 	i = 0
 	#words not in pairs
@@ -24,7 +27,6 @@ def make_chains(corpus):
 	 		#appends changes the list
 			dictionary[key].append(corpus[i+2])
 		i += 1
-	print "NEW!!", dictionary
 
 	# i = 1
 	# for words in corpus:
@@ -37,7 +39,7 @@ def make_chains(corpus):
 	# 	i += 1
 	# 	if i == (len(corpus) - 1):
 	# 		break
-	
+	print "Dictionary: "
 	return dictionary
 
 def make_text(chains):
@@ -69,11 +71,12 @@ def make_text(chains):
 
 def main(argv):
 	args = sys.argv
-	script, filename = argv
+	script, filename_1, filename_2 = argv
 
 	#opens txt file form command line
-	input_text = open(filename).read()
-	dictionary = make_chains(input_text)
+	input_text_1 = open(filename_1).read()
+	input_text_2 = open(filename_2).read()
+	dictionary = make_chains(input_text_1, input_text_2)
 
 	random_text = make_text(dictionary)
 	# print random_text
