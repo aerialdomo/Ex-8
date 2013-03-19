@@ -48,7 +48,7 @@ def make_text(chains):
 	sentence = first_word
 
 
-	for i in range(0,3):	
+	for i in range(0,3):
 		# loop range(x,y) times
 		# get random value from key, value is a list
 		next_word = chains[first_word][randint(0, len(chains[first_word]) - 1)]
