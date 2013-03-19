@@ -3,6 +3,8 @@
 import sys
 import random
 from random import randint
+import twitter
+
 
 def make_chains(corpus):
 	"""Takes an input text as a string and returns a dictionary of
@@ -36,7 +38,6 @@ def make_chains(corpus):
 	# 	i += 1
 	# 	if i == (len(corpus) - 1):
 	# 		break
-	print "Dictionary: "
 	return dictionary
 
 def make_text(chains):
@@ -77,10 +78,21 @@ def main(argv):
 	dictionary_2 = make_chains(input_text_2)
 	sentence_1 = make_text(dictionary_1)
 	sentence_2 = make_text(dictionary_2)
-	print "Sentence: ", sentence_1.title(), sentence_2 + "."
+	tweet = sentence_1.title() + sentence_2 + "."
+	tweet = str(tweet)
+	print tweet
+	
+	api = twitter.Api(consumer_key = 'Mh9QZzIWqBcnSeQAifWGQ',
+                  consumer_secret ='2Isj9UvjaUysZlHBVQlZmf14iWloDq6GCqQSNIO4',
+                  access_token_key='1279013186-ohmMnlHVbWz96eISVytcgjauvFSzKAfdc8oLjrV',
+                  access_token_secret='jlAhKY3qaWvc1O2qyCy1LWfrfPMLcOT16D2ZwLDVLuQ')
 
+	status = api.PostUpdate(tweet)
+	print status.text
 
 	# print random_text
 
 if __name__ == "__main__":
 	main(sys.argv)
+
+
